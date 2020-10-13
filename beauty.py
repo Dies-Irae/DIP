@@ -2,7 +2,6 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-
 def adjust_gamma(image, gamma=1.0):
     invGamma = 1.0/gamma
     table = []
@@ -16,12 +15,17 @@ img = cv2.imread('beauty.jpg')
 b, g, r = cv2.split(img)
 img = cv2.merge([r, g, b])
 
-g = cv2.bilateralFilter(g, 5, 200, 200)
-b = cv2.bilateralFilter(b, 5, 300, 300)
-filtered = cv2.merge([r, g, b])
+# r1 = cv2.bilateralFilter(r, 12, 200, 200)
+# g1 = cv2.bilateralFilter(g, 12, 200, 200)
+# b1 = cv2.bilateralFilter(b, 12, 300, 300)
+# filtered = cv2.merge([r, g1, b1])
+
+g2 = cv2.bilateralFilter(g, 5, 100, 100)
+b2 = cv2.bilateralFilter(b, 5, 100, 100)
+filtered2 = cv2.merge([r, g2, b2])
 
 filtered = cv2.bilateralFilter(img, 10, 100, 75)
-filtered = 0.8*filtered + 0.2*img
+filtered = 0.95*filtered + 0.05*filtered2
 filtered = filtered.astype(np.uint8)
 filtered = adjust_gamma(filtered, 1.4)
 
