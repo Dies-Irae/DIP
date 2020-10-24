@@ -1,0 +1,6 @@
+
+*.iml
+*.xml
+.vs/DIP/v15/.suo
+*.sqlite
+*.json
